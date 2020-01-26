@@ -1,5 +1,10 @@
 module calcu16 (
-    input clk
+  input clk,
+  output LED1,
+  output LED2,
+  output LED3,
+  output LED4,
+  output LED5
 );
     // Registers
     reg [0:15] regArray [0:7]; // General Purpose
@@ -30,9 +35,9 @@ module calcu16 (
         // $dumpvars(7, regArray[0], regArray[1], regArray[2], regArray[3], regArray[4], regArray[5],
         //        regArray[6], regArray[7]);
 
-         $monitor("r0 = %b\nr1 = %b\nr2 = %b\nr3 = %b\nr4 = %b\nr5 = %b\nr6 = %b\nr7 = %b\n\n",
-              regArray[0], regArray[1], regArray[2], regArray[3], regArray[4], regArray[5],
-               regArray[6], regArray[7]);
+        // $monitor("r0 = %b\nr1 = %b\nr2 = %b\nr3 = %b\nr4 = %b\nr5 = %b\nr6 = %b\nr7 = %b\n\n",
+        //      regArray[0], regArray[1], regArray[2], regArray[3], regArray[4], regArray[5],
+        //       regArray[6], regArray[7]);
     end
 
     always @(posedge clk) begin
@@ -65,5 +70,6 @@ module calcu16 (
                 regArray[regSel1] = regArray[regSel2] & regArray[regSel3];
         endcase
     end
+    assign {LED1,LED2,LED3,LED4,LED5} = regArray[1][11:15];
 
 endmodule
